@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Desta Malik Maulana - Versi Ahli</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Icon library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <!-- GSAP for advanced animations -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Font profesional */
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #4a90e2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .profile img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile img:hover {
+            transform: scale(1.1);
+        }
+        .profile-info h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.8em;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .tab {
+            background: #fff;
+            padding: 15px 25px;
+            margin: 0 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+        .tab:hover, .tab.active {
+            background: #4a90e2;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            display: none;
+            opacity: 0;
+        }
+        .content.active {
+            display: block;
+            opacity: 1;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px 0;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a90e2, #764ba2);
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            color: #fff;
+            margin-top: 30px;
+        }
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .profile { flex-direction: column; text-align: center; }
+            .tabs { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-user-graduate"></i> Dashboard Desta Malik Maulana</h1>
+            <p>Kelas 12 SMK Bani Masum | Jurusan Rekayasa Perangkat Lunak</p>
+        </header>
+        
+        <div class="profile">
+            <img src="IMG-20260116-WA0040.jpg" alt="Foto Desta Malik Maulana" id="profileImg"> <!-- Ganti dengan URL foto asli -->
+            <div class="profile-info">
+                <h2>Desta Malik Maulana</h2>
+                <p>Siswa berbakat di bidang pengembangan perangkat lunak, dengan minat pada web development, AI, dan cybersecurity.</p>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="profil">Profil</div>
+            <div class="tab" data-tab="kemajuan">Kemajuan Belajar</div>
+            <div class="tab" data-tab="kontak">Kontak</div>
+        </div>
+        
+        <div id="profil" class="content active">
+            <h3><i class="fas fa-id-card"></i> Profil</h3>
+            <p>Saya Desta Malik Maulana, siswa kelas 12 di SMK Bani Masum jurusan RPL. Saya memiliki passion dalam coding, khususnya JavaScript, Python, dan framework seperti React. Saya telah mengerjakan proyek seperti aplikasi web sederhana, game edukasi, dan integrasi API.</p>
+            <ul>
+                <li><strong>Keahlian:</strong> HTML, CSS, JavaScript, Node.js, SQL.</li>
+                <li><strong>Proyek Unggulan:</strong> Dashboard interaktif seperti ini, aplikasi to-do list dengan local storage.</li>
+            </ul>
+        </div>
+        
+        <div id="kemajuan" class="content">
+            <h3><i class="fas fa-chart-line"></i> Kemajuan Belajar</h3>
+            <p>Progress dalam mata pelajaran utama (dengan animasi counter):</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress1"></div>
+                <div class="progress-text" id="progressText1">0%</div>
+            </div>
+            <p>85% - Pemrograman Dasar</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress2"></div>
+                <div class="progress-text" id="progressText2">0%</div>
+            </div>
+            <p>90% - Database</p>
+        </div>
+        
+        <div id="kontak" class="content">
+            <h3><i class="fas fa-envelope"></i> Kontak</h3>
+            <p><i class="fas fa-envelope"></i> Email: desta.malik@example.com</p> <!-- Ganti dengan email asli jika ada -->
+            <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/6289524609907" target="_blank">+62 895-2460-9907</a></p>
+            <p><i class="fab fa-instagram"></i> Instagram: <a href="https://instagram.com/destamalikmaulana122" target="_blank">@destamalikmaulana122</a></p>
+            <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://linkedin.com/in/destamalik" target="_blank">linkedin.com/in/destamalik</a></p>
+            <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/destamalik" target="_blank">github.com/destamalik</a></p>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2023 Desta Malik Maulana. Dibuat dengan ❤️ oleh Ahli Coding HTML/CSS/JS.
+    </footer>
+    
+    <script>
+        // GSAP Animasi untuk fade-in elemen
+        gsap.from("header", { duration: 1, y: -50, opacity: 0 });
+        gsap.from(".profile", { duration: 1.5, y: 50, opacity: 0, delay: 0.5 });
+        gsap.from(".tabs", { duration: 1, scale: 0.8, opacity: 0, delay: 1 });
+
+        // Tab switching dengan animasi
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.content');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const target = document.getElementById(tab.dataset.tab);
+                target.classList.add('active');
+                gsap.from(target, { duration: 0.5, x: -50, opacity: 0 });
+            });
+        });
+
+        // Animasi progress bar dengan counter
+        function animateProgress(id, targetPercent) {
+            const fill = document.getElementById(id);
+            const text = document.getElementById(id.replace('progress', 'progressText'));
+            let current = 0;
+            const interval = setInterval(() => {
+                if (current >= targetPercent) {
+                    clearInterval(interval);
+                } else {
+                    current++;
+                    fill.style.width = current + '%';
+                    text.textContent = current + '%';
+                }
+            }, 20);
+        }
+
+        // Trigger animasi saat tab kemajuan aktif
+        document.querySelector('[data-tab="kemajuan"]').addEventListener('click', () => {
+            setTimeout(() => {
+                animateProgress('progress1', 85);
+                setTimeout(() => animateProgress('progress2', 90), 500);
+            }, 500);
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Desta Malik Maulana - Versi Ahli</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Icon library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <!-- GSAP for advanced animations -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Font profesional */
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #4a90e2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .profile img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile img:hover {
+            transform: scale(1.1);
+        }
+        .profile-info h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.8em;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .tab {
+            background: #fff;
+            padding: 15px 25px;
+            margin: 0 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+        .tab:hover, .tab.active {
+            background: #4a90e2;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            display: none;
+            opacity: 0;
+        }
+        .content.active {
+            display: block;
+            opacity: 1;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px 0;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a90e2, #764ba2);
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            color: #fff;
+            margin-top: 30px;
+        }
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .profile { flex-direction: column; text-align: center; }
+            .tabs { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-user-graduate"></i> Dashboard Desta Malik Maulana</h1>
+            <p>Kelas 12 SMK Bani Masum | Jurusan Rekayasa Perangkat Lunak</p>
+        </header>
+        
+        <div class="profile">
+            <img src="IMG-20260116-WA0040.jpg" alt="Foto Desta Malik Maulana" id="profileImg"> <!-- Ganti dengan URL foto asli -->
+            <div class="profile-info">
+                <h2>Desta Malik Maulana</h2>
+                <p>Siswa berbakat di bidang pengembangan perangkat lunak, dengan minat pada web development, AI, dan cybersecurity.</p>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="profil">Profil</div>
+            <div class="tab" data-tab="kemajuan">Kemajuan Belajar</div>
+            <div class="tab" data-tab="kontak">Kontak</div>
+        </div>
+        
+        <div id="profil" class="content active">
+            <h3><i class="fas fa-id-card"></i> Profil</h3>
+            <p>Saya Desta Malik Maulana, siswa kelas 12 di SMK Bani Masum jurusan RPL. Saya memiliki passion dalam coding, khususnya JavaScript, Python, dan framework seperti React. Saya telah mengerjakan proyek seperti aplikasi web sederhana, game edukasi, dan integrasi API.</p>
+            <ul>
+                <li><strong>Keahlian:</strong> HTML, CSS, JavaScript, Node.js, SQL.</li>
+                <li><strong>Proyek Unggulan:</strong> Dashboard interaktif seperti ini, aplikasi to-do list dengan local storage.</li>
+            </ul>
+        </div>
+        
+        <div id="kemajuan" class="content">
+            <h3><i class="fas fa-chart-line"></i> Kemajuan Belajar</h3>
+            <p>Progress dalam mata pelajaran utama (dengan animasi counter):</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress1"></div>
+                <div class="progress-text" id="progressText1">0%</div>
+            </div>
+            <p>85% - Pemrograman Dasar</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress2"></div>
+                <div class="progress-text" id="progressText2">0%</div>
+            </div>
+            <p>90% - Database</p>
+        </div>
+        
+        <div id="kontak" class="content">
+            <h3><i class="fas fa-envelope"></i> Kontak</h3>
+            <p><i class="fas fa-envelope"></i> Email: desta.malik@example.com</p> <!-- Ganti dengan email asli jika ada -->
+            <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/6289524609907" target="_blank">+62 895-2460-9907</a></p>
+            <p><i class="fab fa-instagram"></i> Instagram: <a href="https://instagram.com/destamalikmaulana122" target="_blank">@destamalikmaulana122</a></p>
+            <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://linkedin.com/in/destamalik" target="_blank">linkedin.com/in/destamalik</a></p>
+            <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/destamalik" target="_blank">github.com/destamalik</a></p>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2023 Desta Malik Maulana. Dibuat dengan ❤️ oleh Ahli Coding HTML/CSS/JS.
+    </footer>
+    
+    <script>
+        // GSAP Animasi untuk fade-in elemen
+        gsap.from("header", { duration: 1, y: -50, opacity: 0 });
+        gsap.from(".profile", { duration: 1.5, y: 50, opacity: 0, delay: 0.5 });
+        gsap.from(".tabs", { duration: 1, scale: 0.8, opacity: 0, delay: 1 });
+
+        // Tab switching dengan animasi
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.content');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const target = document.getElementById(tab.dataset.tab);
+                target.classList.add('active');
+                gsap.from(target, { duration: 0.5, x: -50, opacity: 0 });
+            });
+        });
+
+        // Animasi progress bar dengan counter
+        function animateProgress(id, targetPercent) {
+            const fill = document.getElementById(id);
+            const text = document.getElementById(id.replace('progress', 'progressText'));
+            let current = 0;
+            const interval = setInterval(() => {
+                if (current >= targetPercent) {
+                    clearInterval(interval);
+                } else {
+                    current++;
+                    fill.style.width = current + '%';
+                    text.textContent = current + '%';
+                }
+            }, 20);
+        }
+
+        // Trigger animasi saat tab kemajuan aktif
+        document.querySelector('[data-tab="kemajuan"]').addEventListener('click', () => {
+            setTimeout(() => {
+                animateProgress('progress1', 85);
+                setTimeout(() => animateProgress('progress2', 90), 500);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
